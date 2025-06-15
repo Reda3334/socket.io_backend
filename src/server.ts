@@ -89,6 +89,7 @@ const chatIO = new Server(chatServer, {
 // Manejar conexiones de Socket.IO para el chat
 chatIO.on('connection', (socket) => {
     console.log(`Usuario conectado al chat: ${socket.id}`);
+    socket.broadcast.emit('user_connected', { socketId: socket.id });
 
     // Verificación JWT para el socket principal
     socket.use(([event, ...args], next) => {
